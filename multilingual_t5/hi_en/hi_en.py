@@ -1,7 +1,7 @@
 """hi_en dataset."""
 
 import tensorflow_datasets as tfds
-import pandas as pd
+import tensorflow as tf
 
 # TODO(hi_en): Markdown description  that will appear on the catalog page.
 _DESCRIPTION = """
