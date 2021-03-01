@@ -56,8 +56,8 @@ class HiEn(tfds.core.GeneratorBasedBuilder):
     # TODO(hi_en): Yields (key, example) tuples from the dataset
     beam = tfds.core.lazy_imports.apache_beam
 
-    src = tf.io.gfile.GFile(bn_src, mode='r').readlines()
-    tgt = tf.io.gfile.GFile(bn_tgt, mode='r').readlines()
+    src = tf.io.gfile.GFile(src, mode='r').readlines()
+    tgt = tf.io.gfile.GFile(tgt, mode='r').readlines()
 
     d = {}
     d['src'] = src
