@@ -92,4 +92,4 @@ class CcaAll(tfds.core.GeneratorBasedBuilder):
           'target': row[1]
         }
 
-    return (beam.Create([d]) | beam.FlatMap(_process_file))
+    return (beam.Create([d]) | beam.Map(_process_file))
