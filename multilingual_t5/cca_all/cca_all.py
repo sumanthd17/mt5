@@ -41,7 +41,7 @@ class CcaAll(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     hi = dl_manager.download_and_extract('https://anuvaad-parallel-corpus.s3-us-west-2.amazonaws.com/train-2021-v1-en-hi.zip')
-    cca = df_manage.download_and_extract('https://storage.googleapis.com/ai4b-anuvaad-nmt/hi_en/data/en-hi.zip')
+    cca = dl_manager.download_and_extract('https://storage.googleapis.com/ai4b-anuvaad-nmt/hi_en/data/en-hi.zip')
 
     devtest = dl_manager.download_and_extract('https://anuvaad-parallel-corpus.s3-us-west-2.amazonaws.com/devtest-2021-v1.zip')
 
