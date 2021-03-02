@@ -232,6 +232,22 @@ t5.data.TaskRegistry.add(
 
 t5.data.MixtureRegistry.add('hi_en', ['hi_en'], default_rate=1.0)
 
+t5.data.TaskRegistry.add(
+    'cca_all',
+    t5.data.TfdsTask,
+    tfds_name="cca_all:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='hindi',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('cca_all', ['cca_all'], default_rate=1.0)
+
 # ----- XNLI -----
 # XNLI zero-shot task. This fine-tunes on English MNLI training data and then
 # evaluates on multilingual XNLI dev/test data.
