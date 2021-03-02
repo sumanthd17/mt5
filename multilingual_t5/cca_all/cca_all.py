@@ -2,6 +2,7 @@
 
 import tensorflow_datasets as tfds
 import tensorflow as tf
+import random
 
 # TODO(cca_all): Markdown description  that will appear on the catalog page.
 _DESCRIPTION = """
