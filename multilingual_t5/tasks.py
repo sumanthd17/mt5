@@ -19,6 +19,7 @@ from multilingual_t5 import preprocessors
 from multilingual_t5 import utils
 import multilingual_t5.indic_corpus.indic_corpus
 import multilingual_t5.hi_en.hi_en
+import multilingual_t5.cca_all.cca_all
 
 import t5.data
 from t5.evaluation import metrics
