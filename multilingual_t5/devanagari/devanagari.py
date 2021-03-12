@@ -55,7 +55,7 @@ class Devanagari(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     # TODO(devanagari): Downloads the data and defines the splits
-    path = dl_manager.download_and_extract('pre-train/transliterated/data/transliterated.zip')
+    path = dl_manager.download_and_extract('https://storage.googleapis.com/pre-train/transliterated/data/devanagari.zip')
 
     # TODO(devanagari): Returns the Dict[split names, Iterator[Key, Example]]
     splits = []
