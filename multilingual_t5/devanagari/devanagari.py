@@ -63,7 +63,7 @@ class Devanagari(tfds.core.GeneratorBasedBuilder):
       splits.extend(
         [
           tfds.core.SplitGenerator(
-            name=lang, gen_kwargs=dict(path=/f"transliterated/{lang}.txt")
+            name=lang, gen_kwargs=dict(path=path/f"transliterated/{lang}.txt")
           ),
           tfds.core.SplitGenerator(
             name=f'{lang}-validation', gen_kwargs=dict(path=path/f"transliterated/{lang}-validation.txt"),
