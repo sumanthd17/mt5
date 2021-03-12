@@ -208,8 +208,8 @@ for lang in scripts:
         metric_fns=[],
     )
 
-indic_corpus = ["devanagari.{}".format(lang) for lang in scripts]
-t5.data.MixtureRegistry.add("devanagari", indic_corpus, default_rate=DEFAULT_MIX_RATE)
+devanagari = ["devanagari.{}".format(lang) for lang in scripts]
+t5.data.MixtureRegistry.add("devanagari", devanagari, default_rate=DEFAULT_MIX_RATE)
 
 # Wikipedia
 for lang in WIKI_LANGS:

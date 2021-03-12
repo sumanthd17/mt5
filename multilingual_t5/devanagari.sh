@@ -1,8 +1,8 @@
 export PROJECT=ai4b-word-embeddings
-export ZONE=europe-west4-a
+export ZONE=us-central1-f
 export BUCKET=gs://pre-train
-export TPU_NAME=fine-tune
-export TPU_SIZE=v3-8
+export TPU_NAME=tfds-creation
+export TPU_SIZE=v2-8
 export DATA_DIR="${BUCKET}/transliterated/data"
 export MODEL_DIR="${BUCKET}/transliterated/model-dir"
 export TASK=devanagari
