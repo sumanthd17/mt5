@@ -15,6 +15,11 @@ It should also contain any processing which has been applied (if any),
 _CITATION = """
 """
 
+VERSION = tfds.core.Version('1.0.0')
+RELEASE_NOTES = {
+    '1.0.0': 'Initial release.',
+}
+
 INDIC_LANGS = ['en', 'devanagari']
 
 class DevanagariConfig(tfds.core.BuilderConfig):
@@ -26,11 +31,6 @@ class DevanagariConfig(tfds.core.BuilderConfig):
 
 class Devanagari(tfds.core.GeneratorBasedBuilder):
   """DatasetBuilder for devanagari dataset."""
-
-  VERSION = tfds.core.Version('1.0.0')
-  RELEASE_NOTES = {
-      '1.0.0': 'Initial release.',
-  }
 
   BUILDER_CONFIGS = [
     DevanagariConfig(
