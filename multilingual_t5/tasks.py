@@ -19,6 +19,7 @@ from multilingual_t5 import preprocessors
 from multilingual_t5 import utils
 import multilingual_t5.indic_corpus.indic_corpus
 import multilingual_t5.hi_en.hi_en
+import multilingual_t5.devanagari.devanagari
 
 import t5.data
 from t5.evaluation import metrics
@@ -189,6 +190,26 @@ for lang in INDIC_LANGS:
 
 indic_corpus = ["indic_corpus.{}".format(lang) for lang in INDIC_LANGS]
 t5.data.MixtureRegistry.add("indic_corpus", indic_corpus, default_rate=DEFAULT_MIX_RATE)
+
+# devanagari
+scripts = ["en", "devanagari"]
+
+for lang in scripts:
+    t5.data.TaskRegistry.add(
+        "devanagari.{}".format(lang),
+        t5.data.TfdsTask,
+        tfds_name="devanagari:1.0.0",
+        splits={"train": lang, "validation": f"{lang}-validation"},
+        text_preprocessor=functools.partial(
+            t5.data.preprocessors.rekey, key_map={"inputs": None, "targets": "text"}
+        ),
+        token_preprocessor=t5.data.preprocessors.span_corruption,
+        output_features=DEFAULT_OUTPUT_FEATURES,
+        metric_fns=[],
+    )
+
+indic_corpus = ["devanagari.{}".format(lang) for lang in scripts]
+t5.data.MixtureRegistry.add("devanagari", indic_corpus, default_rate=DEFAULT_MIX_RATE)
 
 # Wikipedia
 for lang in WIKI_LANGS:
