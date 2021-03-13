@@ -84,7 +84,7 @@ class Devanagari(tfds.core.GeneratorBasedBuilder):
     if split == 'train':
       for file_ in tf.io.gfile.listdir(path):
         if 'validation' not in str(file_):
-          lines = tf.io.gflie.GFile(path+file_, 'r').readlines()
+          lines = tf.io.gflie.GFile(str(path)+'/'+file_, 'r').readlines()
           for idx, row in enumerate(lines):
             yield idx, {
               'text': row
