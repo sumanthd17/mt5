@@ -76,7 +76,7 @@ class Devanagari(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     # TODO(devanagari): Yields (key, example) tuples from the dataset
     if split == 'eval':
-      lines = tf.io.gflie.GFile(path/f'{lang}-validation', 'r').readlines()
+      lines = tf.io.gflie.GFile(path/f'{lang}-validation.txt', 'r').readlines()
       for idx, row in enumerate(lines):
         yield idx, {
           'text': row
