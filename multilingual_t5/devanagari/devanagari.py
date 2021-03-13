@@ -63,21 +63,29 @@ class Devanagari(tfds.core.GeneratorBasedBuilder):
       splits.extend(
         [
           tfds.core.SplitGenerator(
-            name=lang, gen_kwargs=dict(path=path/f"devanagari/{lang}.txt")
+            name=lang, gen_kwargs=dict(path=path/f"devanagari/{lang}/", split='train', lang=lang)
           ),
           tfds.core.SplitGenerator(
-            name=f'{lang}-validation', gen_kwargs=dict(path=path/f"devanagari/{lang}-validation.txt"),
+            name=f'{lang}-validation', gen_kwargs=dict(path=path/f"devanagari/{lang}/", split='eval', lang=lang),
           )
         ]
       )
     return splits
 
-  def _generate_examples(self, path):
+  def _generate_examples(self, path, split, lang):
     """Yields examples."""
     # TODO(devanagari): Yields (key, example) tuples from the dataset
-    lines = tf.io.gfile.GFile(path, mode='r').readlines()
-
-    for idx, row in enumerate(lines):
-      yield idx, {
-        'text': row
-      }
+    if split == 'eval':
+      lines = tf.io.gflie.GFile(path/f'{lang}-validation', 'r').readlines()
+      for idx, row in enumerate(lines):
+        yield idx, {
+          'text': row
+        }
+    if split == 'train':
+      for file_ in path.glob('*'):
+        if file_ != f'{lang}-validation.txt':
+          lines = tf.io.gflie.GFile(path/file_, 'r').readlines()
+          for idx, row in enumerate(lines):
+            yield idx, {
+              'text': row
+            }
