@@ -19,7 +19,9 @@ from multilingual_t5 import preprocessors
 from multilingual_t5 import utils
 import multilingual_t5.indic_corpus.indic_corpus
 import multilingual_t5.hi_en.hi_en
+import multilingual_t5.baseline_bn.baseline_bn
 import multilingual_t5.baseline_hi.baseline_hi
+import multilingual_t5.baseline_ta.baseline_ta
 
 import t5.data
 from t5.evaluation import metrics
@@ -217,6 +219,22 @@ t5.data.MixtureRegistry.add("mc4_wiki", mc4 + wiki, default_rate=DEFAULT_MIX_RAT
 
 # ----- NMT baselines -----
 t5.data.TaskRegistry.add(
+    'baseline_bn',
+    t5.data.TfdsTask,
+    tfds_name="baseline_bn:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='bengali',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('baseline_bn', ['baseline_bn'], default_rate=1.0)
+
+t5.data.TaskRegistry.add(
     'baseline_hi',
     t5.data.TfdsTask,
     tfds_name="baseline_hi:1.0.0",
@@ -233,20 +251,20 @@ t5.data.TaskRegistry.add(
 t5.data.MixtureRegistry.add('baseline_hi', ['baseline_hi'], default_rate=1.0)
 
 t5.data.TaskRegistry.add(
-    'baseline_bn',
+    'baseline_ta',
     t5.data.TfdsTask,
-    tfds_name="baseline_bn:1.0.0",
+    tfds_name="baseline_ta:1.0.0",
     splits=['train', 'validation'],
     text_preprocessor=functools.partial(
         preprocessors.process_nmt,
-        source_language='bengali',
+        source_language='tamil',
         target_language='english'
     ),
     output_features=DEFAULT_OUTPUT_FEATURES,
     metric_fns=[metrics.bleu]
 )
 
-t5.data.MixtureRegistry.add('baseline_bn', ['baseline_bn'], default_rate=1.0)
+t5.data.MixtureRegistry.add('baseline_ta', ['baseline_ta'], default_rate=1.0)
 
 # ----- NMT -----
 t5.data.TaskRegistry.add(
