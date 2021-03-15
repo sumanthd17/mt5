@@ -46,7 +46,7 @@ class BaselineHi(tfds.core.GeneratorBasedBuilder):
     # TODO(baseline_hi): Returns the Dict[split names, Iterator[Key, Example]]
     return {
         'train': self._generate_examples(source=path/'en-hi/train/train.hi', target=path/'en-hi/train/train.en'),
-        'validation': self._generate_examples(source=path/'en-hi/dev/dev.hi', target=path/'eni-hi/dev/dev.en')
+        'validation': self._generate_examples(source=path/'en-hi/dev/dev.hi', target=path/'en-hi/dev/dev.en')
     }
 
   def _generate_examples(self, source, target):
