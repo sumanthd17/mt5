@@ -214,6 +214,23 @@ t5.data.MixtureRegistry.add("mc4_wiki", mc4 + wiki, default_rate=DEFAULT_MIX_RAT
 
 # =========================== Fine-tuning Tasks/Mixtures =======================
 
+# ----- NMT baselines -----
+t5.data.TaskRegistry.add(
+    'baseline_hi',
+    t5.data.TfdsTask,
+    tfds_name="baseline_hi:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='hindi',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('baseline_hi', ['baseline_hi'], default_rate=1.0)
+
 # ----- NMT -----
 t5.data.TaskRegistry.add(
     'hi_en',
