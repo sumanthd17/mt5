@@ -2,6 +2,7 @@
 
 import tensorflow_datasets as tfds
 import tensorflow as tf
+import os
 
 # TODO(devanagari): Markdown description  that will appear on the catalog page.
 _DESCRIPTION = """
@@ -76,16 +77,20 @@ class Devanagari(tfds.core.GeneratorBasedBuilder):
     """Yields examples."""
     # TODO(devanagari): Yields (key, example) tuples from the dataset
     if split == 'eval':
-      lines = tf.io.gflie.GFile(path/f'{lang}-validation.txt', 'r').readlines()
+      with open(str(path)+'/'+f'{lang}-validation.txt', 'r') as f:
+        lines = f.readlines()
+      # lines = tf.io.gflie.GFile(path/f'{lang}-validation.txt', 'r').readlines()
       for idx, row in enumerate(lines):
         yield idx, {
           'text': row
         }
     if split == 'train':
-      for i, file_ in enumerate(tf.io.gfile.listdir(path)):
+      for i, file_ in enumerate(os.listdir(path)):
         if 'val' in file_:
           continue
-        lines = tf.io.gflie.GFile(str(path)+'/'+file_, 'r').readlines()
+        with open(str(path)+'/'+file_, 'r') as f:
+          lines = f.readlines()
+        # lines = tf.io.gflie.GFile(str(path)+'/'+file_, 'r').readlines()
         print(i, file_)
         for idx, row in enumerate(lines):
           yield i*1000000+idx, {
