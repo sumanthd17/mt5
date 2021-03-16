@@ -88,6 +88,6 @@ class Devanagari(tfds.core.GeneratorBasedBuilder):
         lines = tf.io.gflie.GFile(str(path)+'/'+file_, 'r').readlines()
         print(i, file_)
         for idx, row in enumerate(lines):
-          yield idx, {
+          yield i*1000000+idx, {
             'text': row
           }
