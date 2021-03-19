@@ -22,12 +22,14 @@ import multilingual_t5.hi_en.hi_en
 import multilingual_t5.baseline_bn.baseline_bn
 import multilingual_t5.baseline_hi.baseline_hi
 import multilingual_t5.baseline_ta.baseline_ta
+import multilingual_t5.devanagari.devanagari
 
 import t5.data
 from t5.evaluation import metrics
 import tensorflow_datasets as tfds
 
-DEFAULT_SPM_PATH = "gs://t5-data/vocabs/mc4.250000.100extra/sentencepiece.model"
+DEFAULT_SPM_PATH = "gs://pre-train/transliterated/tokenizer/indictrans-spiece.model"
+# DEFAULT_SPM_PATH = "gs://t5-data/vocabs/mc4.250000.100extra/sentencepiece.model"
 # DEFAULT_SPM_PATH = "gs://pre-train/tokenizer/spiece.model"
 
 DEFAULT_TEMPERATURE = 1.0 / 0.3
