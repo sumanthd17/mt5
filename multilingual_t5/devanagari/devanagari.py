@@ -27,13 +27,13 @@ class Devanagari(tfds.core.GeneratorBasedBuilder):
     """Returns the dataset metadata."""
     # TODO(devanagari): Specifies the tfds.core.DatasetInfo object
     features = {"text": tfds.features.Text()}
-        return tfds.core.DatasetInfo(
-            builder=self,
-            description=_DESCRIPTION,
-            features=tfds.features.FeaturesDict(features),
-            homepage="https://indicnlp.ai4bharat.org/home/",
-            citation=_CITATION,
-        )
+    return tfds.core.DatasetInfo(
+        builder=self,
+        description=_DESCRIPTION,
+        features=tfds.features.FeaturesDict(features),
+        homepage="https://indicnlp.ai4bharat.org/home/",
+        citation=_CITATION,
+    )
 
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
