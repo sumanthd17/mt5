@@ -193,6 +193,26 @@ for lang in INDIC_LANGS:
 indic_corpus = ["indic_corpus.{}".format(lang) for lang in INDIC_LANGS]
 t5.data.MixtureRegistry.add("indic_corpus", indic_corpus, default_rate=DEFAULT_MIX_RATE)
 
+# IndicTrans Objective
+SCRIPTS = ["devanagari", "en"]
+
+for lang in SCRIPTS:
+    t5.data.TaskRegistry.add(
+        "indic_trans.{}".format(lang),
+        t5.data.TfdsTask,
+        tfds_name="devanagari:1.0.0",
+        splits={"train": lang, "validation": f"{lang}-validation"},
+        text_preprocessor=functools.partial(
+            t5.data.preprocessors.rekey, key_map={"inputs": None, "targets": "text"}
+        ),
+        token_preprocessor=t5.data.preprocessors.span_corruption,
+        output_features=DEFAULT_OUTPUT_FEATURES,
+        metric_fns=[],
+    )
+
+indic_corpus = ["indic_trans.{}".format(lang) for lang in SCRIPTS]
+t5.data.MixtureRegistry.add("indic_trans", indic_corpus, default_rate=DEFAULT_MIX_RATE)
+
 # Wikipedia
 for lang in WIKI_LANGS:
     t5.data.TaskRegistry.add(
