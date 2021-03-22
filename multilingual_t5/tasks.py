@@ -29,6 +29,16 @@ import multilingual_t5.baseline_or.baseline_or
 import multilingual_t5.baseline_pa.baseline_pa
 import multilingual_t5.baseline_ta.baseline_ta
 import multilingual_t5.baseline_te.baseline_te
+
+import multilingual_t5.r_baseline_bn.r_baseline_bn
+import multilingual_t5.r_baseline_gu.r_baseline_gu
+import multilingual_t5.r_baseline_hi.r_baseline_hi
+import multilingual_t5.r_baseline_kn.r_baseline_kn
+import multilingual_t5.r_baseline_ml.r_baseline_ml
+import multilingual_t5.r_baseline_mr.r_baseline_mr
+import multilingual_t5.r_baseline_pa.r_baseline_pa
+import multilingual_t5.r_baseline_ta.r_baseline_ta
+import multilingual_t5.r_baseline_te.r_baseline_te
 import multilingual_t5.devanagari.devanagari
 
 import t5.data
@@ -247,6 +257,7 @@ t5.data.MixtureRegistry.add("mc4_wiki", mc4 + wiki, default_rate=DEFAULT_MIX_RAT
 # =========================== Fine-tuning Tasks/Mixtures =======================
 
 # ----- NMT baselines -----
+# forward
 t5.data.TaskRegistry.add(
     'baseline_bn',
     t5.data.TfdsTask,
@@ -344,22 +355,6 @@ t5.data.TaskRegistry.add(
 t5.data.MixtureRegistry.add('baseline_mr', ['baseline_mr'], default_rate=1.0)
 
 t5.data.TaskRegistry.add(
-    'baseline_or',
-    t5.data.TfdsTask,
-    tfds_name="baseline_or:1.0.0",
-    splits=['train', 'validation'],
-    text_preprocessor=functools.partial(
-        preprocessors.process_nmt,
-        source_language='oriya',
-        target_language='english'
-    ),
-    output_features=DEFAULT_OUTPUT_FEATURES,
-    metric_fns=[metrics.bleu]
-)
-
-t5.data.MixtureRegistry.add('baseline_or', ['baseline_or'], default_rate=1.0)
-
-t5.data.TaskRegistry.add(
     'baseline_pa',
     t5.data.TfdsTask,
     tfds_name="baseline_pa:1.0.0",
@@ -407,6 +402,151 @@ t5.data.TaskRegistry.add(
 
 t5.data.MixtureRegistry.add('baseline_te', ['baseline_te'], default_rate=1.0)
 
+
+# reverse
+t5.data.TaskRegistry.add(
+    'r_baseline_bn',
+    t5.data.TfdsTask,
+    tfds_name="r_baseline_bn:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='bengali',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('r_baseline_bn', ['r_baseline_bn'], default_rate=1.0)
+
+t5.data.TaskRegistry.add(
+    'r_baseline_gu',
+    t5.data.TfdsTask,
+    tfds_name="r_baseline_gu:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='gujarati',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('r_baseline_gu', ['r_baseline_gu'], default_rate=1.0)
+
+t5.data.TaskRegistry.add(
+    'r_baseline_hi',
+    t5.data.TfdsTask,
+    tfds_name="r_baseline_hi:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='hindi',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('r_baseline_hi', ['r_baseline_hi'], default_rate=1.0)
+
+t5.data.TaskRegistry.add(
+    'r_baseline_kn',
+    t5.data.TfdsTask,
+    tfds_name="r_baseline_kn:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='kannada',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('r_baseline_kn', ['r_baseline_kn'], default_rate=1.0)
+
+t5.data.TaskRegistry.add(
+    'r_baseline_ml',
+    t5.data.TfdsTask,
+    tfds_name="r_baseline_ml:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='malayalam',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('r_baseline_ml', ['r_baseline_ml'], default_rate=1.0)
+
+t5.data.TaskRegistry.add(
+    'r_baseline_mr',
+    t5.data.TfdsTask,
+    tfds_name="r_baseline_mr:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='marathi',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('r_baseline_mr', ['r_baseline_mr'], default_rate=1.0)
+
+t5.data.TaskRegistry.add(
+    'r_baseline_pa',
+    t5.data.TfdsTask,
+    tfds_name="r_baseline_pa:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='punjabi',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('r_baseline_pa', ['r_baseline_pa'], default_rate=1.0)
+
+t5.data.TaskRegistry.add(
+    'r_baseline_ta',
+    t5.data.TfdsTask,
+    tfds_name="r_baseline_ta:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='tamil',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('r_baseline_ta', ['r_baseline_ta'], default_rate=1.0)
+
+t5.data.TaskRegistry.add(
+    'r_baseline_te',
+    t5.data.TfdsTask,
+    tfds_name="r_baseline_te:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='telugu',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('r_baseline_te', ['r_baseline_te'], default_rate=1.0)
 # ----- NMT -----
 t5.data.TaskRegistry.add(
     'hi_en',

@@ -100,10 +100,9 @@ python -m t5.models.mesh_transformer_main \
   --gcp_project="${PROJECT}" \
   --tpu_zone="${ZONE}" \
   --model_dir="${MODEL_DIR}" \
-  --t5_tfds_data_dir="${BUCKET}/tfds" \
+  --t5_tfds_data_dir="${DATA_DIR}/tfds" \
   --project_name="IndicTrans-pretraining" \
   --gin_file="models/t5.1.1.base.gin" \
-  --gin_file="perplexity_eval.gin" \
   --gin_param="MIXTURE_NAME = '${TASK}'" \
   --gin_param="utils.run.sequence_length = {'inputs': 128, 'targets': 128}" \
   --gin_param="utils.run.batch_size = ('tokens_per_batch', 131072)" \
@@ -118,3 +117,5 @@ python -m t5.models.mesh_transformer_main \
   --gin_param="mesh_transformer.get_vocabulary.mixture_or_task_name = %MIXTURE_NAME" \
   --gin_param="utils.run.vocabulary = @mesh_transformer.get_vocabulary()" \
   --module_import="multilingual_t5.tasks"
+
+    --gin_file="perplexity_eval.gin" \
