@@ -1,6 +1,7 @@
 """baseline_mr dataset."""
 
 import tensorflow_datasets as tfds
+import tensorflow as tf
 
 # TODO(baseline_mr): Markdown description  that will appear on the catalog page.
 _DESCRIPTION = """
