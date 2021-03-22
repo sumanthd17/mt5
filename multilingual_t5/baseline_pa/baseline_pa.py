@@ -48,7 +48,7 @@ class BaselinePa(tfds.core.GeneratorBasedBuilder):
         'validation': self._generate_examples(source=path/'en-pa/dev/dev.pa', target=path/'en-pa/dev/dev.en')
     }
 
-  def _generate_examples(self, path):
+  def _generate_examples(self, source, target):
     """Yields examples."""
     # TODO(baseline_pa): Yields (key, example) tuples from the dataset
     src = tf.io.gfile.GFile(source, 'r').readlines()

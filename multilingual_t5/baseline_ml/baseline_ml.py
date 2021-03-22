@@ -48,7 +48,7 @@ class BaselineMl(tfds.core.GeneratorBasedBuilder):
         'validation': self._generate_examples(source=path/'en-ml/dev/dev.ml', target=path/'en-ml/dev/dev.en')
     }
 
-  def _generate_examples(self, path):
+  def _generate_examples(self, source, target):
     """Yields examples."""
     # TODO(baseline_ml): Yields (key, example) tuples from the dataset
     src = tf.io.gfile.GFile(source, 'r').readlines()
