@@ -20,16 +20,23 @@ from multilingual_t5 import utils
 import multilingual_t5.indic_corpus.indic_corpus
 import multilingual_t5.hi_en.hi_en
 import multilingual_t5.baseline_bn.baseline_bn
+import multilingual_t5.baseline_gu.baseline_gu
 import multilingual_t5.baseline_hi.baseline_hi
+import multilingual_t5.baseline_kn.baseline_kn
+import multilingual_t5.baseline_ml.baseline_ml
+import multilingual_t5.baseline_mr.baseline_mr
+import multilingual_t5.baseline_or.baseline_or
+import multilingual_t5.baseline_pa.baseline_pa
 import multilingual_t5.baseline_ta.baseline_ta
+import multilingual_t5.baseline_te.baseline_te
 import multilingual_t5.devanagari.devanagari
 
 import t5.data
 from t5.evaluation import metrics
 import tensorflow_datasets as tfds
 
-DEFAULT_SPM_PATH = "gs://pre-train/transliterated/tokenizer/indictrans-spiece.model"
-# DEFAULT_SPM_PATH = "gs://t5-data/vocabs/mc4.250000.100extra/sentencepiece.model"
+# DEFAULT_SPM_PATH = "gs://pre-train/transliterated/tokenizer/indictrans-spiece.model"
+DEFAULT_SPM_PATH = "gs://t5-data/vocabs/mc4.250000.100extra/sentencepiece.model"
 # DEFAULT_SPM_PATH = "gs://pre-train/tokenizer/spiece.model"
 
 DEFAULT_TEMPERATURE = 1.0 / 0.3
@@ -257,6 +264,22 @@ t5.data.TaskRegistry.add(
 t5.data.MixtureRegistry.add('baseline_bn', ['baseline_bn'], default_rate=1.0)
 
 t5.data.TaskRegistry.add(
+    'baseline_gu',
+    t5.data.TfdsTask,
+    tfds_name="baseline_gu:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='gujarati',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('baseline_gu', ['baseline_gu'], default_rate=1.0)
+
+t5.data.TaskRegistry.add(
     'baseline_hi',
     t5.data.TfdsTask,
     tfds_name="baseline_hi:1.0.0",
@@ -273,6 +296,86 @@ t5.data.TaskRegistry.add(
 t5.data.MixtureRegistry.add('baseline_hi', ['baseline_hi'], default_rate=1.0)
 
 t5.data.TaskRegistry.add(
+    'baseline_kn',
+    t5.data.TfdsTask,
+    tfds_name="baseline_kn:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='kannada',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('baseline_kn', ['baseline_kn'], default_rate=1.0)
+
+t5.data.TaskRegistry.add(
+    'baseline_ml',
+    t5.data.TfdsTask,
+    tfds_name="baseline_ml:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='malayalam',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('baseline_ml', ['baseline_ml'], default_rate=1.0)
+
+t5.data.TaskRegistry.add(
+    'baseline_mr',
+    t5.data.TfdsTask,
+    tfds_name="baseline_mr:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='marathi',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('baseline_mr', ['baseline_mr'], default_rate=1.0)
+
+t5.data.TaskRegistry.add(
+    'baseline_or',
+    t5.data.TfdsTask,
+    tfds_name="baseline_or:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='oriya',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('baseline_or', ['baseline_or'], default_rate=1.0)
+
+t5.data.TaskRegistry.add(
+    'baseline_pa',
+    t5.data.TfdsTask,
+    tfds_name="baseline_pa:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='punjabi',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('baseline_pa', ['baseline_pa'], default_rate=1.0)
+
+t5.data.TaskRegistry.add(
     'baseline_ta',
     t5.data.TfdsTask,
     tfds_name="baseline_ta:1.0.0",
@@ -287,6 +390,22 @@ t5.data.TaskRegistry.add(
 )
 
 t5.data.MixtureRegistry.add('baseline_ta', ['baseline_ta'], default_rate=1.0)
+
+t5.data.TaskRegistry.add(
+    'baseline_te',
+    t5.data.TfdsTask,
+    tfds_name="baseline_te:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='telugu',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('baseline_te', ['baseline_te'], default_rate=1.0)
 
 # ----- NMT -----
 t5.data.TaskRegistry.add(
