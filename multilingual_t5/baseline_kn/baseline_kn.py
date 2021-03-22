@@ -40,7 +40,7 @@ class BaselineKn(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     # TODO(baseline_kn): Downloads the data and defines the splits
-    path = dl_manager.download_and_extract('https://storage.googleapis.com/ai4b-anuvaad-nmt/ai4b-consolidated/en-kn.zip')
+    path = dl_manager.download_and_extract('https://storage.googleapis.com/ai4b-anuvaad-nmt/baselines/mT5/baseline_kn/en-kn.zip')
 
     # TODO(baseline_kn): Returns the Dict[split names, Iterator[Key, Example]]
     return {
