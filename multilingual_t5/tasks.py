@@ -61,6 +61,14 @@ import multilingual_t5.r_pa_en.r_pa_en
 import multilingual_t5.r_ta_en.r_ta_en
 import multilingual_t5.r_te_en.r_te_en
 
+import multilingual_t5.r_ic_all_bn.r_ic_all_bn
+import multilingual_t5.r_ic_all_hi.r_ic_all_hi
+import multilingual_t5.r_ic_all_ta.r_ic_all_ta
+
+import multilingual_t5.r_indic_corp_bn.r_indic_corp_bn
+import multilingual_t5.r_indic_corp_hi.r_indic_corp_hi
+import multilingual_t5.r_indic_corp_ta.r_indic_corp_ta
+
 import t5.data
 from t5.evaluation import metrics
 import tensorflow_datasets as tfds
@@ -874,6 +882,105 @@ t5.data.TaskRegistry.add(
 )
 
 t5.data.MixtureRegistry.add('r_te_en', ['r_te_en'], default_rate=1.0)
+
+# IndicCorp Mined
+t5.data.TaskRegistry.add(
+    'r_ic_all_bn',
+    t5.data.TfdsTask,
+    tfds_name="r_ic_all_bn:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='bengali',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('r_ic_all_bn', ['r_ic_all_bn'], default_rate=1.0)
+
+t5.data.TaskRegistry.add(
+    'r_ic_all_hi',
+    t5.data.TfdsTask,
+    tfds_name="r_ic_all_hi:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='hindi',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('r_ic_all_hi', ['r_ic_all_hi'], default_rate=1.0)
+
+t5.data.TaskRegistry.add(
+    'r_ic_all_ta',
+    t5.data.TfdsTask,
+    tfds_name="r_ic_all_ta:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='tamil',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('r_ic_all_ta', ['r_ic_all_ta'], default_rate=1.0)
+
+# Two stage training
+
+t5.data.TaskRegistry.add(
+    'r_indic_corp_bn',
+    t5.data.TfdsTask,
+    tfds_name="r_indic_corp_bn:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='bengali',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('r_indic_corp_bn', ['r_indic_corp_bn'], default_rate=1.0)
+
+t5.data.TaskRegistry.add(
+    'r_indic_corp_hi',
+    t5.data.TfdsTask,
+    tfds_name="r_indic_corp_hi:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='hindi',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('r_indic_corp_hi', ['r_indic_corp_hi'], default_rate=1.0)
+
+t5.data.TaskRegistry.add(
+    'r_indic_corp_ta',
+    t5.data.TfdsTask,
+    tfds_name="r_indic_corp_ta:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='tamil',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('r_indic_corp_ta', ['r_indic_corp_ta'], default_rate=1.0)
 
 # ----- XNLI -----
 # XNLI zero-shot task. This fine-tunes on English MNLI training data and then
