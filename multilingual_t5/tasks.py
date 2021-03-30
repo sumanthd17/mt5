@@ -41,6 +41,7 @@ import multilingual_t5.r_baseline_ta.r_baseline_ta
 import multilingual_t5.r_baseline_te.r_baseline_te
 import multilingual_t5.devanagari.devanagari
 
+'''
 import multilingual_t5.bn_en.bn_en
 import multilingual_t5.gu_en.gu_en
 import multilingual_t5.hi_en.hi_en
@@ -60,6 +61,7 @@ import multilingual_t5.r_mr_en.r_mr_en
 import multilingual_t5.r_pa_en.r_pa_en
 import multilingual_t5.r_ta_en.r_ta_en
 import multilingual_t5.r_te_en.r_te_en
+'''
 
 import multilingual_t5.r_ic_all_bn.r_ic_all_bn
 import multilingual_t5.r_ic_all_hi.r_ic_all_hi
@@ -575,24 +577,10 @@ t5.data.TaskRegistry.add(
 )
 
 t5.data.MixtureRegistry.add('r_baseline_te', ['r_baseline_te'], default_rate=1.0)
+
 # ----- NMT -----
-t5.data.TaskRegistry.add(
-    'hi_en',
-    t5.data.TfdsTask,
-    tfds_name="hi_en:1.0.0",
-    splits=['train', 'validation'],
-    text_preprocessor=functools.partial(
-        preprocessors.process_nmt,
-        source_language='hindi',
-        target_language='english'
-    ),
-    output_features=DEFAULT_OUTPUT_FEATURES,
-    metric_fns=[metrics.bleu]
-)
 
-t5.data.MixtureRegistry.add('hi_en', ['hi_en'], default_rate=1.0)
-
-
+'''
 # Our Contributions
 t5.data.TaskRegistry.add(
     'bn_en',
@@ -882,6 +870,7 @@ t5.data.TaskRegistry.add(
 )
 
 t5.data.MixtureRegistry.add('r_te_en', ['r_te_en'], default_rate=1.0)
+'''
 
 # IndicCorp Mined
 t5.data.TaskRegistry.add(
