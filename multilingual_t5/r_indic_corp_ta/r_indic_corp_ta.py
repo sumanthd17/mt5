@@ -45,8 +45,8 @@ class RIndicCorpTa(tfds.core.GeneratorBasedBuilder):
 
     # TODO(r_indic_corp_ta): Returns the Dict[split names, Iterator[Key, Example]]
     return {
-        'train': self._generate_examples(source=path/'en-ta/train/train.ta', target=path/'en-ta/train/train.en'),
-        'validation': self._generate_examples(source=path/'en-ta/dev/dev.ta', target=path/'en-ta/dev/dev.en')
+        'train': self._generate_examples(source=path/'en-ta/train/train.en', target=path/'en-ta/train/train.ta'),
+        'validation': self._generate_examples(source=path/'en-ta/dev/dev.en', target=path/'en-ta/dev/dev.ta')
     }
 
   def _generate_examples(self, source, target):

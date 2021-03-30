@@ -45,8 +45,8 @@ class RIcAllHi(tfds.core.GeneratorBasedBuilder):
 
     # TODO(r_ic_all_hi): Returns the Dict[split names, Iterator[Key, Example]]
     return {
-        'train': self._generate_examples(source=path/'en-hi/train/train.hi', target=path/'en-hi/train/train.en'),
-        'validation': self._generate_examples(source=path/'en-hi/dev/dev.hi', target=path/'en-hi/dev/dev.en')
+        'train': self._generate_examples(source=path/'en-hi/train/train.en', target=path/'en-hi/train/train.hi'),
+        'validation': self._generate_examples(source=path/'en-hi/dev/dev.en', target=path/'en-hi/dev/dev.hi')
     }
 
   def _generate_examples(self, source, target):
