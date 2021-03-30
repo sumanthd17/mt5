@@ -41,7 +41,7 @@ class RIcAllHi(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     # TODO(r_ic_all_hi): Downloads the data and defines the splits
-    path = dl_manager.download_and_extract('https://storage.cloud.google.com/ai4b-anuvaad-nmt/ai4b-models/mT5/hi/ic_all_hi.zip')
+    path = dl_manager.download_and_extract('https://storage.googleapis.com/ai4b-anuvaad-nmt/ai4b-models/mT5/hi/ic_all_hi.zip')
 
     # TODO(r_ic_all_hi): Returns the Dict[split names, Iterator[Key, Example]]
     return {
