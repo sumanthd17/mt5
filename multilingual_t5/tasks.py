@@ -41,6 +41,8 @@ import multilingual_t5.r_baseline_ta.r_baseline_ta
 import multilingual_t5.r_baseline_te.r_baseline_te
 import multilingual_t5.devanagari.devanagari
 
+import multilingual_t5.ic_all_hi.ic_all_hi
+
 '''
 import multilingual_t5.bn_en.bn_en
 import multilingual_t5.gu_en.gu_en
@@ -970,6 +972,24 @@ t5.data.TaskRegistry.add(
 )
 
 t5.data.MixtureRegistry.add('r_indic_corp_ta', ['r_indic_corp_ta'], default_rate=1.0)
+
+
+# 
+t5.data.TaskRegistry.add(
+    'ic_all_hi',
+    t5.data.TfdsTask,
+    tfds_name="ic_all_hi:1.0.0",
+    splits=['train', 'validation'],
+    text_preprocessor=functools.partial(
+        preprocessors.process_nmt,
+        source_language='hindi',
+        target_language='english'
+    ),
+    output_features=DEFAULT_OUTPUT_FEATURES,
+    metric_fns=[metrics.bleu]
+)
+
+t5.data.MixtureRegistry.add('ic_all_hi', ['ic_all_hi'], default_rate=1.0)
 
 # ----- XNLI -----
 # XNLI zero-shot task. This fine-tunes on English MNLI training data and then
