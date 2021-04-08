@@ -41,7 +41,7 @@ class RBaselineHi(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     # TODO(baseline_hi): Downloads the data and defines the splits
-    path = dl_manager.download_and_extract('https://storage.googleapis.com/ai4b-anuvaad-nmt/baselines/mT5/baseline_hi/en-hi.zip')
+    path = dl_manager.download_and_extract('https://storage.googleapis.com/ai4b-anuvaad-nmt/baselines/mT5/baseline_hi/strict-en-hi.zip')
 
     # TODO(baseline_hi): Returns the Dict[split names, Iterator[Key, Example]]
     return {

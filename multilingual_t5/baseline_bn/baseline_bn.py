@@ -41,7 +41,7 @@ class BaselineBn(tfds.core.GeneratorBasedBuilder):
   def _split_generators(self, dl_manager: tfds.download.DownloadManager):
     """Returns SplitGenerators."""
     # TODO(baseline_bn): Downloads the data and defines the splits
-    path = dl_manager.download_and_extract('https://storage.googleapis.com/ai4b-anuvaad-nmt/baselines/mT5/baseline_bn/en-bn.zip')
+    path = dl_manager.download_and_extract('https://storage.googleapis.com/ai4b-anuvaad-nmt/baselines/mT5/baseline_bn/strict-en-bn.zip')
 
     # TODO(baseline_bn): Returns the Dict[split names, Iterator[Key, Example]]
     return {
